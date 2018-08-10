@@ -9,6 +9,9 @@ public class DisplayDriver extends Canvas {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static DisplayDriver display;
+	private static JFrame frame;
+	private static final int WIDTH = 640, HEIGHT = 480;
 
 	public void paint(Graphics g) {
 		g.drawString("Hello", 40, 40);
@@ -22,11 +25,15 @@ public class DisplayDriver extends Canvas {
 
 	}
 
+	public void setUp() {
+
+	}
+
 	public static void main(String[] args) {
-		DisplayDriver display = new DisplayDriver();
-		JFrame frame = new JFrame();
+		display = new DisplayDriver();
+		frame = new JFrame();
 		frame.add(display);
-		frame.setSize(400, 400);
+		frame.setSize(WIDTH, HEIGHT);
 		// f.setLayout(null);
 		frame.setVisible(true);
 	}
