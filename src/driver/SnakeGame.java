@@ -32,7 +32,7 @@ public class SnakeGame implements GameEngine {
 
 		snake = new Snake(SCALE, new Segment(null, null, Properties.WIDTH / 2, Properties.HEIGHT / 2));
 		for (int i = 0; i < SNAKE_LENGTH; i++) {
-			snake.update();
+/*			snake.update();*/
 			snake.addSegment();
 		}
 
@@ -67,7 +67,7 @@ public class SnakeGame implements GameEngine {
 
 	}
 
-	public static void main(String[] args) throws InvalidDimensionException {
+	public static void main(String[] args) throws Exception {
 		DisplayDriver driver = new DisplayDriver(new SnakeGame());
 		driver.run();
 	}

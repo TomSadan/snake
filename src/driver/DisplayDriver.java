@@ -6,13 +6,12 @@ import javax.swing.JFrame;
 import config.Properties;
 import interfaces.GameEngine;
 
-public class DisplayDriver extends Canvas {
+public class DisplayDriver extends JFrame {
 
 	/**
 	 * Main Driver
 	 */
 	private static final long serialVersionUID = 1L;
-	private static JFrame frame;
 	private GameEngine engine;
 
 	private boolean run = false;
@@ -23,28 +22,20 @@ public class DisplayDriver extends Canvas {
 	}
 
 	public void paint(Graphics g) {
-		try {
-			engine.run();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		engine.draw(g);
 	}
 
 	private void setup() {
-		frame = new JFrame();
-		frame.add(this);
-		frame.setSize(Properties.WIDTH, Properties.HEIGHT);
-		frame.setVisible(true);
+		setSize(Properties.WIDTH, Properties.HEIGHT);
+		setVisible(true);
 		run = true;
 	}
 
-	public void run() {
+	public void run() throws Exception {
 		run(-1);
 	}
 
-	public void run(int delay) {
+	public void run(int delay) throws Exception {
 		while (run) {
 			if (delay != -1) {
 				try {
@@ -55,8 +46,9 @@ public class DisplayDriver extends Canvas {
 				}
 			}
 
+			engine.run();
 			repaint();
-			frame.revalidate();
+			revalidate();
 		}
 	}
 
