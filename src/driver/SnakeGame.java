@@ -22,7 +22,7 @@ public class SnakeGame implements GameEngine {
 	private final Color snakeClr = Color.YELLOW;
 	private final Color blockClr = Color.RED;
 
-	private final int SCALE = 10;
+	private final int SCALE = 20;
 	private final int RUNTIME_COUNT_MAX = 1000;
 
 	private int runtimeCounter;
@@ -32,7 +32,7 @@ public class SnakeGame implements GameEngine {
 
 		snake = new Snake(SCALE, new Segment(null, null, Properties.WIDTH / 2, Properties.HEIGHT / 2));
 		for (int i = 0; i < SNAKE_LENGTH; i++) {
-/*			snake.update();*/
+			/* snake.update(); */
 			snake.addSegment();
 		}
 
@@ -68,7 +68,7 @@ public class SnakeGame implements GameEngine {
 	}
 
 	public static void main(String[] args) throws Exception {
-		DisplayDriver driver = new DisplayDriver(new SnakeGame());
+		DisplayDriver driver = new DisplayDriver(new SnakeGame(), "Snake Game Demo");
 		driver.run();
 	}
 }

@@ -14,21 +14,22 @@ public class DisplayDriver extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private GameEngine engine;
 
-	private boolean run = false;
-
 	public DisplayDriver(GameEngine engine) {
 		this.engine = engine;
-		setup();
+		setSize(Properties.WIDTH, Properties.HEIGHT);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new BorderLayout());
+		setVisible(true);
+	}
+
+	public DisplayDriver(GameEngine engine, String title) {
+		this(engine);
+		this.setTitle(title);
 	}
 
 	public void paint(Graphics g) {
+		/* super.paint(g); */
 		engine.draw(g);
-	}
-
-	private void setup() {
-		setSize(Properties.WIDTH, Properties.HEIGHT);
-		setVisible(true);
-		run = true;
 	}
 
 	public void run() throws Exception {
@@ -36,7 +37,7 @@ public class DisplayDriver extends JFrame {
 	}
 
 	public void run(int delay) throws Exception {
-		while (run) {
+		while (isVisible()) {
 			if (delay != -1) {
 				try {
 					Thread.sleep(delay);
@@ -45,7 +46,6 @@ public class DisplayDriver extends JFrame {
 					e.printStackTrace();
 				}
 			}
-
 			engine.run();
 			repaint();
 			revalidate();

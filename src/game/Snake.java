@@ -38,6 +38,7 @@ public class Snake {
 		while (curr != null) {
 			if (curr.x == block.x && curr.y == block.y)
 				return true;
+			curr = curr.tail;
 		}
 		return false;
 	}
