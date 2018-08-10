@@ -3,6 +3,9 @@ package driver;
 import java.awt.*;
 import javax.swing.JFrame;
 
+import config.Properties;
+import interfaces.GameEngine;
+
 public class DisplayDriver extends Canvas {
 
 	/**
@@ -10,39 +13,46 @@ public class DisplayDriver extends Canvas {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static JFrame frame;
-	private static final int WIDTH = 640, HEIGHT = 480;
-	private static int x = 100;
+	private GameEngine engine;
+
+	private boolean run = false;
+
+	public DisplayDriver(GameEngine engine) {
+		this.engine = engine;
+		setup();
+	}
 
 	public void paint(Graphics g) {
-		g.setColor(new Color(x, 55, 255));
-		g.fillRect(0, 0, WIDTH, HEIGHT);
-		/*
-		 * setBackground(Color.WHITE); g.fillRect(130, 30, 100, 80); g.drawOval(30, 130,
-		 * 50, 60); setForeground(Color.RED); g.fillOval(130, 130, 50, 60);
-		 * g.drawArc(30, 200, 40, 50, 90, 60); g.fillArc(30, 130, 40, 50, 180, 40);
-		 */
-
+		g.setColor(new Color(0, 0, 0));
+		g.fillRect(0, 0, Properties.WIDTH, Properties.HEIGHT);
+		engine.run();
+		engine.draw(g);
 	}
 
-	public void setUp() {
+	private void setup() {
 		frame = new JFrame();
 		frame.add(this);
-		frame.setSize(WIDTH, HEIGHT);
+		frame.setSize(Properties.WIDTH, Properties.HEIGHT);
 		frame.setVisible(true);
+		run = true;
 	}
 
-	public static void main(String[] args) {
-		DisplayDriver driver = new DisplayDriver();
-		driver.setUp();
-		while (true) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	public void run() {
+		run(-1);
+	}
+
+	public void run(int delay) {
+		while (run) {
+			if (delay != -1) {
+				try {
+					Thread.sleep(delay);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			x = (x + 1) % 255;
-			driver.repaint();
+
+			repaint();
 			frame.revalidate();
 		}
 	}
