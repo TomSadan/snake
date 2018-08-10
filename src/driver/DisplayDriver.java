@@ -35,8 +35,13 @@ public class DisplayDriver extends Canvas {
 		DisplayDriver driver = new DisplayDriver();
 		driver.setUp();
 		while (true) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			x = (x + 1) % 255;
-			System.out.println(x);
 			driver.repaint();
 			frame.revalidate();
 		}
