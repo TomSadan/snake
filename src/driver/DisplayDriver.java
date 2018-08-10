@@ -23,9 +23,12 @@ public class DisplayDriver extends Canvas {
 	}
 
 	public void paint(Graphics g) {
-		g.setColor(new Color(0, 0, 0));
-		g.fillRect(0, 0, Properties.WIDTH, Properties.HEIGHT);
-		engine.run();
+		try {
+			engine.run();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		engine.draw(g);
 	}
 
