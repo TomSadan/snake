@@ -16,7 +16,7 @@ public class DisplayDriver extends JFrame {
 
 	public DisplayDriver(GameEngine engine) {
 		this.engine = engine;
-		setSize(Properties.WIDTH, Properties.HEIGHT);
+		setSize(Properties.WIDTH * Properties.SCALE, Properties.HEIGHT * Properties.SCALE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		setVisible(true);

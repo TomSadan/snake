@@ -22,21 +22,21 @@ public class SnakeGame implements GameEngine {
 	private final Color snakeClr = Color.YELLOW;
 	private final Color blockClr = Color.RED;
 
-	private final int SCALE = 20;
-
 	private Counter snakeTimer;
 
 	public SnakeGame() throws InvalidDimensionException {
 		snakeTimer = new Counter(5);
 
-		snake = new Snake(SCALE, new Segment(null, null, Properties.WIDTH / 2, Properties.HEIGHT / 2));
+		snake = new Snake(Properties.SCALE, new Segment(null, null, Properties.WIDTH * Properties.SCALE / 2,
+				Properties.HEIGHT * Properties.SCALE / 2));
 		for (int i = 0; i < SNAKE_LENGTH; i++) {
 			/* snake.update(); */
 			snake.addSegment();
 		}
 
-		block1 = new Block(SCALE, Properties.WIDTH - SCALE - 1, Properties.HEIGHT / 2);
-		block2 = new Block(SCALE, 1, Properties.HEIGHT / 2);
+		block1 = new Block(Properties.SCALE, (Properties.WIDTH - 1) * Properties.SCALE,
+				Properties.HEIGHT * Properties.SCALE / 2);
+		block2 = new Block(Properties.SCALE, 0, Properties.HEIGHT * Properties.SCALE / 2);
 	}
 
 	@Override
@@ -54,8 +54,7 @@ public class SnakeGame implements GameEngine {
 
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(bgClr);
-		g.fillRect(0, 0, Properties.WIDTH, Properties.HEIGHT);
+		this.draw(g, bgClr);
 		g.setColor(blockClr);
 		for (Block block : new Block[] { block1, block2 }) {
 			block.draw(g);
