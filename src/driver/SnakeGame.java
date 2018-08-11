@@ -10,6 +10,7 @@ import game.Segment;
 import game.Snake;
 import interfaces.GameEngine;
 import math.Counter;
+import math.Vector;
 
 public class SnakeGame implements GameEngine {
 	private Snake snake;
@@ -28,9 +29,8 @@ public class SnakeGame implements GameEngine {
 		snakeTimer = new Counter(5);
 
 		snake = new Snake(Properties.SCALE, new Segment(null, null, Properties.WIDTH * Properties.SCALE / 2,
-				Properties.HEIGHT * Properties.SCALE / 2));
+				Properties.HEIGHT * Properties.SCALE / 2), new Vector(Properties.SCALE, 0));
 		for (int i = 0; i < SNAKE_LENGTH; i++) {
-			/* snake.update(); */
 			snake.addSegment();
 		}
 
@@ -45,8 +45,7 @@ public class SnakeGame implements GameEngine {
 			snake.update();
 			for (Block block : new Block[] { block1, block2 }) {
 				if (snake.collidedWith(block)) {
-					System.out.println("BINGO");
-					snake.setDirection(snake.getDirection().multiply(-1));
+					snake.setDirection(snake.getDirection().reverse());
 				}
 			}
 		}

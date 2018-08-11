@@ -54,6 +54,14 @@ public class Vector {
 		return new Vector(productArr);
 	}
 
+	public Vector reverse() {
+		int[] reverseRepr = new int[size()];
+		for (int i = 0; i < size(); i++) {
+			reverseRepr[i] = repr[size() - 1 - i];
+		}
+		return new Vector(reverseRepr);
+	}
+
 	public int size() {
 		return repr.length;
 	}

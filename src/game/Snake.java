@@ -12,11 +12,15 @@ public class Snake {
 	private Vector direction;
 	private int scale;
 
-	public Snake(int scale, Segment head) {
+	public Snake(int scale, Segment head, Vector direction) {
 		this.head = head;
 		this.tail = head;
 		this.scale = scale;
-		this.direction = new Vector(scale, 0);
+		this.direction = direction;
+	}
+
+	public Snake(Snake snake) {
+		this(snake.scale, snake.head, snake.direction);
 	}
 
 	public void update() throws InvalidDimensionException {
