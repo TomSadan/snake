@@ -15,20 +15,10 @@ public class Segment {
 
 	public void refreshSegmentCluster(int x, int y) {
 		if (tail != null) {
-			tail.refreshSegmentCluster();
+			tail.refreshSegmentCluster(this.x, this.y);
 		}
 		this.x = x;
 		this.y = y;
 
-	}
-
-	public void refreshSegmentCluster() {
-		if (head != null) {
-			this.x = head.x;
-			this.y = head.y;
-			if (tail != null) {
-				tail.refreshSegmentCluster();
-			}
-		}
 	}
 }

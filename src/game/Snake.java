@@ -47,8 +47,13 @@ public class Snake {
 		return false;
 	}
 
+	public boolean collidedWithHead(Block block) {
+		return (head.x == block.x && head.y == block.y);
+	}
+
 	public void addSegment() {
 		this.tail.tail = new Segment(this.tail, null, this.tail.x, this.tail.y);
+		this.tail = this.tail.tail;
 	}
 
 	public Vector getDirection() {
