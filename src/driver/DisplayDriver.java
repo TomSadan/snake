@@ -28,7 +28,6 @@ public class DisplayDriver extends JFrame {
 	}
 
 	public void paint(Graphics g) {
-		/* super.paint(g); */
 		engine.draw(g);
 	}
 

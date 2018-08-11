@@ -9,10 +9,10 @@ import game.Block;
 import game.Segment;
 import game.Snake;
 import interfaces.GameEngine;
+import math.Counter;
 
 public class SnakeGame implements GameEngine {
 	private Snake snake;
-	private final int SNAKE_UPDATE_INTERVAL = 45;
 	private final int SNAKE_LENGTH = 3;
 
 	private Block block1;
@@ -23,12 +23,11 @@ public class SnakeGame implements GameEngine {
 	private final Color blockClr = Color.RED;
 
 	private final int SCALE = 20;
-	private final int RUNTIME_COUNT_MAX = 1000;
 
-	private int runtimeCounter;
+	private Counter snakeTimer;
 
 	public SnakeGame() throws InvalidDimensionException {
-		runtimeCounter = 0;
+		snakeTimer = new Counter(5);
 
 		snake = new Snake(SCALE, new Segment(null, null, Properties.WIDTH / 2, Properties.HEIGHT / 2));
 		for (int i = 0; i < SNAKE_LENGTH; i++) {
@@ -42,16 +41,15 @@ public class SnakeGame implements GameEngine {
 
 	@Override
 	public void run() throws InvalidDimensionException {
-		if (runtimeCounter % SNAKE_UPDATE_INTERVAL == 0) {
+		if (snakeTimer.tick()) {
 			snake.update();
 			for (Block block : new Block[] { block1, block2 }) {
 				if (snake.collidedWith(block)) {
+					System.out.println("BINGO");
 					snake.setDirection(snake.getDirection().multiply(-1));
 				}
 			}
 		}
-		runtimeCounter = ((runtimeCounter + 1) % RUNTIME_COUNT_MAX);
-
 	}
 
 	@Override
@@ -69,6 +67,6 @@ public class SnakeGame implements GameEngine {
 
 	public static void main(String[] args) throws Exception {
 		DisplayDriver driver = new DisplayDriver(new SnakeGame(), "Snake Game Demo");
-		driver.run();
+		driver.run(100);
 	}
 }
